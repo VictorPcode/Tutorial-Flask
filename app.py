@@ -1,8 +1,8 @@
-from flask_bootstrap import Bootstrap5
+from flask_bootstrap import Bootstrap
 from flask import Flask, jsonify, make_response, request, redirect, render_template
 
 app= Flask(__name__,template_folder="template", static_folder="static")
-bootstrap = Bootstrap5(app)
+bootstrap = Bootstrap(app)
 
 todos = ['Comprar cafe', 'Solicitud de compra ', 'Enviar video al productor']
 
