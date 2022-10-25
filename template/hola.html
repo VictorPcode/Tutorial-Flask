@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+{%import 'macros.html' as macros%}
+
+{%block title%}{{super()}} Bienvenido{%endblock%}
+
+{%block content%}
+    {%if user_ip%}
+        <h1>Su numero IP es: {{user_ip}}</h1>
+    {%else%}
+        <a href="{{url_for('index')}}">ir al inicio</a>
+    {%endif%}
+        <ul style="list-style: none;">
+    {% for todo in todos%}
+         {{macros.render_todo(todo)}}
+    {%endfor%}
+        </ul>
+
+{%endblock%}
+   

@@ -1,0 +1,40 @@
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body h1{
+    color: rgb(51, 211, 99);
+}
+
+nav {
+    display: inline-flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+nav img {
+    max-width: 100px;
+    align-content: flex-start;
+}
+
+
+
+nav ul li{
+    text-decoration: none;
+    list-style: none;
+    display: inline-flex;
+    
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(51, 211, 99);
+    margin: 0;
+    padding: 15px;
+}
+
+nav ul li a:hover {
+    color: white;
+    background-color: rgb(167, 230, 246);
+    cursor:default;
+}
