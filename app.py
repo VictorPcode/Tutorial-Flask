@@ -40,7 +40,7 @@ def hola():
         
         return redirect(url_for('index'))
     
-    return render_template('static/template/hola.html', **context)
+    return render_template('hola.html', **context)
 
 @app.errorhandler(404)
 def error_notFound(error):
