@@ -26,4 +26,16 @@ def user_put(user_data):
   
 def put_todo(user_id, description):
   todos_collection_ref = db.collection('users').document(user_id).collection('todos')
-  todos_collection_ref.add({'description': description})
+  todos_collection_ref.add({'description': description, 'done': False})
+  
+def delete_todo(user_id, todo_id):
+  todoref = _get_todo_ref(user_id, todo_id)
+  todoref.delete()
+  
+def update_todo(user_id, todo_id, done):
+  todo_done = bool(done)
+  todoref = _get_todo_ref(user_id, todo_id)
+  todoref.update({'done': not todo_done})
+
+def _get_todo_ref(user_id, todo_id):
+   return db.document('users/{}/todos/{}'.format(user_id, todo_id))

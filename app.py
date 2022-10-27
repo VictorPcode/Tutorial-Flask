@@ -3,8 +3,8 @@ from flask import jsonify,url_for, make_response,flash, session, request, redire
 from flask_login import login_required, current_user
 
 from app import create_app
-from app.forms import todoForm
-from app.firesotre_service import get_todos, put_todo, get_users
+from app.forms import todoForm, DeleteTodoForm, UpdateTodoForm
+from app.firesotre_service import get_todos,delete_todo, put_todo, get_users, update_todo
 
 app= create_app()
 
@@ -44,12 +44,17 @@ def hola():
     user_ip= session.get('user_ip')
     username = current_user.id
     todo_form = todoForm()
+    delete_form = DeleteTodoForm()
+    update_form = UpdateTodoForm()
     
     context= {
             'user_ip': user_ip,
             'todos': get_todos(user_id=username),
             'username': username,
-            'todo_form': todo_form
+            'todo_form': todo_form,
+            'delete_form': delete_form,
+            'update_form': update_form
+            
         }
     
     users = get_users()
@@ -66,6 +71,20 @@ def hola():
     
     return render_template('hola.html', **context)
 
+
+@app.route('/todos/delete/<todo_id>', methods=['POST'])
+def delete(todo_id):
+    user_id = current_user.id
+    delete_todo(user_id=user_id, todo_id=todo_id)
+    return redirect(url_for('hola'))
+
+
+@app.route('/todos/update/<todo_id>/<int:done>', methods=['POST'])
+def update(todo_id, done):
+     user_id = current_user.id
+     update_todo(user_id=user_id, todo_id=todo_id, done=done)
+     return redirect(url_for('hola'))
     
+ 
 if __name__ == '__main__':
     app.run(port= 3000, debug=True)
