@@ -49,8 +49,8 @@ def signup():
     }
     
     if signup_form.validate_on_submit():
-        username = signup_form.username.data()
-        password = signup_form.password.data()
+        username = signup_form.username.data
+        password = signup_form.password.data
         
         user_doc = get_user(username)
         
@@ -65,7 +65,7 @@ def signup():
 
             flash('Bienvenido!')
 
-            return redirect(url_for('hello'))
+            return redirect(url_for('hola'))
 
         else:
             flash('El usario existe!')

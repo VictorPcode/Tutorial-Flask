@@ -2,12 +2,8 @@
 <nav>
     <img src="{{url_for('static', filename='images/logoVp.png')}}" alt="logoVp">
     <ul>
-        <li><a href="/">inicio</a></li>
-        <li><a href="/desarrollo">desarrollo</a></li>
-        <li><a href="/servicios">servicios</a></li>
-        <li><a href="/hosting">hosting</a></li>
-        <li><a href="/infraestructura">infraestructura</a></li>
-        
+        <li><a href="/">TODO-LIST</a></li>
+        <li><a href="/desarrollo">404 BUTTON</a></li>
         {%if current_user.is_authenticated%} 
         {%endif%}   
         {% if current_user.is_authenticated %}
