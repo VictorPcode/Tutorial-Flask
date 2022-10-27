@@ -22,11 +22,8 @@ def login():
         user_doc = get_user(username)
         
         if user_doc.to_dict() is not None:
-            password_hash = generate_password_hash(password)
-            user_data = UserData(username, password_hash)
-
             password_from_db = user_doc.to_dict()['password']
-            
+
             if password == password_from_db:
                 user_data = UserData(username, password)
                 user = UserModel(user_data)
@@ -55,12 +52,26 @@ def signup():
         username = signup_form.username.data()
         password = signup_form.password.data()
         
-    #     user_doc = get_user(username)
-    #     if user_doc.to_dict() is None:
-            
-            
-    
-    # return render_template('signup.html', **context)
+        user_doc = get_user(username)
+        
+        if user_doc.to_dict() is None:
+            password_hash = generate_password_hash(password)
+            user_data = UserData(username, password_hash)
+            user_put(user_data)
+
+            user = UserModel(user_data)
+
+            login_user(user)
+
+            flash('Bienvenido!')
+
+            return redirect(url_for('hello'))
+
+        else:
+            flash('El usario existe!')
+
+    return render_template('signup.html', **context)
+
 
 @auth.route('logout')
 @login_required
