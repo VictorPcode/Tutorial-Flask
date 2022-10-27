@@ -1,10 +1,13 @@
 import unittest
 from flask import jsonify, make_response, session, request, redirect, render_template
-from flask_login import login_required
+from flask_login import login_required, current_user
+
 from app import create_app
-from app.firesotre_service import get_todos
+from app.firesotre_service import get_todos, get_users
 
 app= create_app()
+
+
 
 @app.cli.command()
 def test():
@@ -24,12 +27,20 @@ def index():
 @login_required
 def hola():
     user_ip= session.get('user_ip')
-    username = session.get('username')
+    username = current_user.id
+    
     context= {
             'user_ip': user_ip,
             'todos': get_todos(user_id=username),
             'username': username,
         }
+    
+    users = get_users()
+
+    for user in users:
+        print(user.id)
+        print(user.to_dict()['password'])
+
 
     return render_template('hola.html', **context)
 

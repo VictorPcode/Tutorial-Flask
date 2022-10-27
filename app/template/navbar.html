@@ -7,7 +7,12 @@
         <li><a href="/servicios">servicios</a></li>
         <li><a href="/hosting">hosting</a></li>
         <li><a href="/infraestructura">infraestructura</a></li>
-        <li><a href="/auth/login">Login</a></li>     
+        
+        {%if current_user.is_authenticated%} 
+        {%endif%}   
+        {% if current_user.is_authenticated %}
+            <li class="logout"><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+        {% endif %} 
     </ul>
     
 </nav>
