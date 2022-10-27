@@ -1,12 +1,10 @@
-from flask import flash, jsonify, make_response, session, request, redirect, render_template, url_for
 import unittest
+from flask import jsonify, make_response, session, request, redirect, render_template
+from flask_login import login_required
 from app import create_app
-from app.forms import LoginForm
+from app.firesotre_service import get_todos
 
 app= create_app()
-
-todos = ['Comprar cafe', 'Solicitud de compra ', 'Enviar video al productor']
-
 
 @app.cli.command()
 def test():
@@ -23,14 +21,19 @@ def index():
     return response
 
 @app.route('/inicio', methods=['GET'])
+@login_required
 def hola():
     user_ip= session.get('user_ip')
     username = session.get('username')
-    context= {'user_ip': user_ip,
-          'todos': todos,
-          'username': username,
+    context= {
+            'user_ip': user_ip,
+            'todos': get_todos(user_id=username),
+            'username': username,
         }
+
     return render_template('hola.html', **context)
+
+
 
 @app.errorhandler(404)
 def error_notFound(error):

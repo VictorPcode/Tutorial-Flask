@@ -7,7 +7,6 @@ from . import auth
 def login():
     login_form = LoginForm()
     context ={
-        
         'login_form': login_form,
     }
     
@@ -18,4 +17,4 @@ def login():
       
         return redirect(url_for('index'))
     
-    return render_template('login.html', **context)
+    return render_template('logint.html', **context)

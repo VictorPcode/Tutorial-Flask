@@ -3,38 +3,62 @@ html {
 }
 
 body h1{
-    color: rgb(51, 211, 99);
+    color: rgb(84, 225, 127);
 }
 
 nav {
-    display: inline-flex;
-    flex-direction: row;
+    display: flex;
     align-items:center;
+    background-color: rgb(176, 246, 246);
 }
 
 nav img {
     max-width: 100px;
-    align-content: flex-start;
 }
 
-
+nav ul {
+    width: 100%;
+    padding: 15px;
+}
 
 nav ul li{
     text-decoration: none;
     list-style: none;
-    display: inline-flex;
+    display:inline-flex;
     
+    
+}
+
+nav ul li:last-child {
+    float: right;
+    background-color: rgba(0, 0, 0, 0.066);
 }
 
 nav ul li a {
     text-decoration: none;
-    color: rgb(51, 211, 99);
+    color: rgb(14, 120, 46);
     margin: 0;
     padding: 15px;
 }
 
 nav ul li a:hover {
     color: white;
-    background-color: rgb(167, 230, 246);
+    background-color: rgba(0, 0, 0, 0.219);
     cursor:default;
+    text-decoration: none;
+}
+
+.container {
+    width: 35%;
+}
+div form {
+    padding: 25px;
+    border: 1px solid black;
+    margin-top: 100px;
+    box-shadow: 15px 10px 10px #2c2c2c42;
+
+    text-align: center;
+   
+
+
 }
